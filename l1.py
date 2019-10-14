@@ -20,6 +20,20 @@ class bandits(object):
     def getResult(self, i):
         return np.random.normal(self.hand[i], 1)
 
+    def getOptimalRewards(self):
+        loc_results_iter = np.zeros(len(self.results), dtype=np.int16)
+        loc_results = np.zeros(len(self.results[0]))
+        for i in range(1, len(self.results[0])):
+            best_val = self.results[0][loc_results_iter[0]]
+            best = 0
+            for pos, val in enumerate(loc_results_iter):
+                if best_val <= self.results[pos][val]:
+                    best_val = self.results[pos][val]
+                    best = pos
+            loc_results_iter[best] = loc_results_iter[best] + 1
+            loc_results[i] = best_val + loc_results[i-1]
+        return loc_results
+
 def getUCB(Q, N, t, c = 2):
     max_val = float('-Inf')
     max_a = 0
@@ -34,16 +48,20 @@ def getUCB(Q, N, t, c = 2):
     return max_a
 
 k = 10
-bandit = bandits(k)
+t = 101
+bandit = bandits(k, t=t)
 Q = np.zeros(k)
 N = np.zeros(k)
+CR = np.zeros(t)
 
-for i in range(1, 1000):
+for i in range(1, t):
     A = getUCB(Q, N, i)
     R = bandit.getPrecomputedResult(A)
+    CR[i] = R + CR[i-1]
     N[A] = N[A] + 1
     Q[A] = Q[A] + (1/N[A])*(R-Q[A])
 
 print(bandit.hand)
 print(N)
 print(Q)
+print(CR[1:]/bandit.getOptimalRewards()[1:])
