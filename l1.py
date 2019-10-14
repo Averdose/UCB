@@ -3,7 +3,7 @@
 import numpy as np
 
 class bandits(object):
-    def __init__(self, k, mu = 0, sigma = 1, t = 1001):
+    def __init__(self, k, mu = 2, sigma = 1, t = 1001):
         # FIXME
         self.hand = np.random.normal(mu, sigma, k)
         # precompute
