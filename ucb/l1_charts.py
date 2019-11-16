@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from l1 import KArmedBandit, compute_ucb
+from ucb.l1 import KArmedBandit, compute_ucb
 
 
 def create_chart(arms, means, sigma, max_pulls, ucb_consts):
