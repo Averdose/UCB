@@ -11,7 +11,7 @@ def create_chart(arms, means, sigma, max_pulls, ucb_consts):
     bandit = KArmedBandit(arms, means, sigma, max_pulls)
     best_pulls, best_rewards = bandit.get_optimal_rewards()
 
-    steps = np.arange(1, max_pulls)
+    steps = np.arange(1, max_pulls+1)
     rewards = pd.DataFrame({'t': steps})
     rewards['optimal'] = np.ones(max_pulls)
     plt.plot('t', 'optimal', data=rewards, color='red', linewidth=4)
