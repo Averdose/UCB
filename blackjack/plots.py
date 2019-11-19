@@ -11,8 +11,8 @@ def plot_expected_returns(values, name):
         X, Y = np.meshgrid(player_cards_values, upcard_values)
         Z = np.reshape(np.array([
             values[player_cards_value, upcard_value, usable_ace]
-            for player_cards_value in player_cards_values
             for upcard_value in upcard_values
+            for player_cards_value in player_cards_values
         ]), X.shape)
 
         ax.plot_surface(
