@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # for 3D plotting
 
 
-def plot_expected_returns(values):
+def plot_expected_returns(values, name):
     def get_figure(ax, usable_ace):
         player_cards_values = np.arange(12, 22)
         upcard_values = np.arange(1, 11)
@@ -39,3 +39,4 @@ def plot_expected_returns(values):
     get_figure(ax, usable_ace=False)
 
     plt.show()
+    plt.savefig(name)
