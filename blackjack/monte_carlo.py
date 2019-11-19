@@ -58,6 +58,6 @@ def policy_update(policy, num_episodes, gamma=1):
                 )
                 counts[state] += 1.0
                 values[state] = returns[state] / counts[state]
-        policy.update(episode, values)
+        policy.update(episode)
 
     return values
